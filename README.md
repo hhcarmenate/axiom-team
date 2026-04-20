@@ -62,7 +62,7 @@ Each phase requires user confirmation before proceeding.
 
 ## Memory system
 
-axiom-team integrates with a persistent memory MCP server (memoria-ai) to:
+axiom-team integrates with a persistent memory MCP server (continuum) to:
 
 - Search for prior decisions and patterns
 - Track bugs and solutions
