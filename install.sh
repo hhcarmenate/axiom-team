@@ -38,6 +38,7 @@ copy_file() {
 echo "Copying template files..."
 copy_file "$SCRIPT_DIR/templates/AGENT.md"               "$PROJECT_DIR/AGENT.md"
 copy_file "$SCRIPT_DIR/templates/CLAUDE.md"              "$PROJECT_DIR/CLAUDE.md"
+copy_file "$SCRIPT_DIR/templates/AGENTS.md"              "$PROJECT_DIR/AGENTS.md"
 copy_file "$SCRIPT_DIR/templates/.cursorrules"           "$PROJECT_DIR/.cursorrules"
 copy_file "$SCRIPT_DIR/templates/.windsurfrules"         "$PROJECT_DIR/.windsurfrules"
 copy_file "$SCRIPT_DIR/templates/.junie/guidelines.md"   "$PROJECT_DIR/.junie/guidelines.md"
