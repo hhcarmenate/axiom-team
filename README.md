@@ -8,7 +8,7 @@ axiom-team provides a unified framework for AI agents (Claude, Cursor, Windsurf,
 
 - **Unified orchestrator** — Same workflow rules across all AI agents
 - **Persistent memory** — Searchable context preserved across sessions
-- **SDD workflow** — 6-phase structured development discipline
+- **SDD workflow** — 6-phase spec-driven development
 - **Sub-agent delegation** — Specialized agents for different tasks
 - **Multi-IDE support** — Works with Claude Code, Cursor, Windsurf, Junie, and more
 
@@ -49,7 +49,7 @@ This will copy template files into your current directory.
 
 ## Workflow overview
 
-axiom-team uses the **SDD (Structured Development Discipline)** workflow with 6 phases:
+axiom-team uses the **SDD (Spec-Driven Development)** workflow with 6 phases:
 
 1. **Brief** — Understand the task
 2. **Specs** — Define technical requirements
