@@ -9,7 +9,7 @@ axiom-team provides a unified framework for AI agents (Claude, Cursor, Windsurf,
 - **Unified orchestrator** — Same workflow rules across all AI agents
 - **Persistent memory** — Searchable context preserved across sessions
 - **SDD workflow** — 6-phase spec-driven development
-- **Sub-agent delegation** — Specialized agents for different tasks
+- **Sub-agent delegation** — Specialized agents for architecture, implementation, testing, review, debugging, databases, documentation, and design direction
 - **Multi-IDE support** — Works with Claude Code, Cursor, Windsurf, Junie, and more
 
 ## Installation
@@ -46,6 +46,16 @@ This will copy template files into your current directory.
 | `.windsurfrules` | Windsurf rules file (references AGENT.md) |
 | `.junie/guidelines.md` | Junie guidelines (references AGENT.md) |
 | `agents/` | Directory for storing specialized agent configurations |
+
+Installed agent files include:
+- `architect` — structural decisions and system design
+- `builder` — implementation following the approved design
+- `tester` — test creation and execution
+- `reviewer` — quality, security, and maintainability review
+- `debugger` — bug investigation and root cause analysis
+- `db-agent` — schema design, migrations, and query optimization
+- `doc-writer` — docstrings, README, and API documentation
+- `design-specialist` — visual direction, distinct UI concepts, and anti-generic design review
 
 ## Workflow overview
 
