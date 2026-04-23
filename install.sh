@@ -1,13 +1,19 @@
 #!/bin/bash
 
+# Usage:
+# ./install.sh --project-dir ~/my-project              (copies all skills)
+# ./install.sh --project-dir ~/my-project --skills react,tailwindcss  (copies only specified skills)
+
 set -e
 
 PROJECT_DIR="."
 FORCE=false
+SKILLS=""
 
 while [[ $# -gt 0 ]]; do
   case $1 in
     --project-dir) PROJECT_DIR="$2"; shift 2 ;;
+    --skills) SKILLS="$2"; shift 2 ;;
     --force) FORCE=true; shift ;;
     *) echo "Unknown option: $1"; exit 1 ;;
   esac
@@ -55,8 +61,47 @@ else
 fi
 
 echo ""
+echo "Copying skills..."
+
+if [ -z "$SKILLS" ]; then
+  # No --skills flag: copy ALL skills
+  if [ -d "$SCRIPT_DIR/../axiom-skills/skills" ]; then
+    mkdir -p "$PROJECT_DIR/.axiom/skills"
+    cp -r "$SCRIPT_DIR/../axiom-skills/skills"/* "$PROJECT_DIR/.axiom/skills/"
+    SKILL_COUNT=$(find "$SCRIPT_DIR/../axiom-skills/skills" -maxdepth 1 -type d | wc -l)
+    echo "  ✓ Copied all $((SKILL_COUNT - 1)) skills"
+    COPIED=$((COPIED + SKILL_COUNT - 1))
+  else
+    echo "  ⊘ axiom-skills not found at ../axiom-skills/skills"
+  fi
+else
+  # --skills flag provided: copy only specified skills
+  IFS=',' read -ra SKILL_ARRAY <<< "$SKILLS"
+
+  for skill_name in "${SKILL_ARRAY[@]}"; do
+    skill_name=$(echo "$skill_name" | xargs)
+    src_skill="$SCRIPT_DIR/../axiom-skills/skills/$skill_name/SKILL.md"
+
+    if [ ! -f "$src_skill" ]; then
+      echo "  Error: Skill '$skill_name' not found at $src_skill"
+      continue
+    fi
+
+    copy_file "$src_skill" "$PROJECT_DIR/.axiom/skills/$skill_name/SKILL.md"
+  done
+fi
+echo ""
+
 echo "Done!"
 echo "  Copied:  $COPIED items"
 echo "  Skipped: $SKIPPED items (use --force to overwrite)"
 echo ""
-echo "Agent ecosystem ready. Open your AI agent and start with: describe your project stack and goals."
+if [ -n "$SKILLS" ]; then
+  echo "Agent ecosystem ready with selected skills: $SKILLS"
+else
+  echo "Agent ecosystem ready with all skills installed."
+  echo "To install only specific skills, use --skills:"
+  echo "  ./install.sh --project-dir <dir> --skills react,tailwindcss,typescript"
+fi
+echo ""
+echo "Next: Open your AI agent and start with: describe your project stack and goals."

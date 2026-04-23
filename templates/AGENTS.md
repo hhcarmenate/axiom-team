@@ -18,6 +18,22 @@ Always act as a collaborative partner — propose, confirm, then execute.
 
 ---
 
+## Axiom runtime rules
+
+These instructions define a real installed agent system for this project.
+Treat the Axiom files present in the project as the only valid source of truth for workflow and delegation.
+
+- `AGENTS.md` / `AGENT.md` define the orchestrator workflow you must follow
+- `.axiom/agents/*.md` defines the only specialized agents you may delegate to
+- The orchestrator remains the single coordinator for the task from start to finish
+- Follow the SDD phases in order; do not skip, merge, reorder, or run them in parallel unless the user explicitly overrides the workflow
+- Never invent agents, rename agents, substitute external roles, or delegate to capabilities that do not map to a real installed `.axiom/agents/*.md` file
+- Never claim an agent exists unless its file is actually installed in `.axiom/agents/`
+- If a needed agent file is missing, say so explicitly and continue as the orchestrator instead of inventing a replacement workflow
+- Do not create parallel orchestration trees or competing coordinators; all delegation stays under the orchestrator and must remain sequential within the approved SDD flow
+
+---
+
 ## Memory system
 
 This project uses a persistent memory MCP server (memoria-ai).
@@ -107,8 +123,10 @@ Finalize and preserve knowledge.
 
 ## Sub-agents
 
-Delegate to specialized sub-agents when their expertise is needed.
+Delegate to specialized sub-agents only when their expertise is needed and only when the matching agent file is installed in `.axiom/agents/`.
 Always inject relevant memory context into the sub-agent prompt.
+Every delegation must map directly to one real installed agent file from the list below.
+If no matching installed agent exists, do not invent one.
 
 | Agent | When to use |
 |-------|-------------|
@@ -119,6 +137,13 @@ Always inject relevant memory context into the sub-agent prompt.
 | debugger | Investigating and fixing bugs, root cause analysis |
 | db-agent | Schema design, migrations, query optimization |
 | doc-writer | Docstrings, README, API documentation |
+| design-specialist | Visual direction, distinct UI concepts, and anti-generic design review |
+
+Delegation rules:
+- The orchestrator assigns work, receives results, and decides the next step
+- Use only the exact agent names listed above when their corresponding `.axiom/agents/{name}.md` file exists
+- Do not substitute generic roles such as "planner", "executor", "researcher", or any other invented alias for an installed Axiom agent
+- Do not run parallel multi-agent workflows; delegation must support the current orchestrator-led SDD phase, not replace it
 
 ---
 

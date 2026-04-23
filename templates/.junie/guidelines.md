@@ -2,3 +2,4 @@
 
 See ../AGENT.md for the full orchestrator instructions.
 All rules, workflow, memory system, and sub-agent delegation are defined there.
+Installed specialized agents include `architect`, `builder`, `tester`, `reviewer`, `debugger`, `db-agent`, `doc-writer`, and `design-specialist` when present in `.axiom/agents/`.
